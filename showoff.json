@@ -1,0 +1,7 @@
+{ "name": "Git vs Riak: Battle Royale"
+, "sections": 
+  [ { "section": "title" } 
+  , { "section": "intro" }
+  , { "section": "git" }
+  ]
+}
