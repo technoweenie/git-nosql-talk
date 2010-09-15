@@ -1,16 +1,33 @@
 !SLIDE
 # What is Git?
 
+!SLIDE bullets
+
+# Git for Source Control
+
+* Each repository contains the full history.
+* It's fast and efficient.
+
+!SLIDE 
+
+![gitx](gitx.png)
+
+!SLIDE
+
+[![git is a distributed source control tool](pullrequest.png)](http://github.com/sinatra/sinatra/pull/56)
+
+!SLIDE bullets
+# Git for Collaboration
+
+* Supports parallel branches for development.
+* Distribute changes with other remote repositories.
+
 !SLIDE
 
 ![stupid content tracker](man_git.png)
 
-!SLIDE
-
-![git is a distributed source control tool](pullrequest.png)
-
-!SLIDE bullets incremental
-# A Key/Value store!
+!SLIDE bullets
+# Git as a Key/Value store!
 
 * Key = SHA
 * Value = Commit, Directory Tree, File, etc
@@ -32,13 +49,6 @@
 
     rdd
 
-!SLIDE
-# Distributed
-
-* Set up remotes
-* Push/Pull References
-* Resolve conflicts
-
 !SLIDE commandline incremental
 # Git References
 
@@ -51,4 +61,8 @@
     author rick <technoweenie@gmail.com> 1284509029 -0700
     committer rick <technoweenie@gmail.com> 1284509044 -0700
 
-    vendor redis-node
+    my commit message
+
+!SLIDE center
+
+![simplified git graph](graph-complete.png)
