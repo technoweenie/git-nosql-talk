@@ -3,5 +3,6 @@
   [ { "section": "title" } 
   , { "section": "intro" }
   , { "section": "git" }
+  , { "section": "riak" }
   ]
 }
