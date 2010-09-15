@@ -52,7 +52,7 @@
 !SLIDE commandline incremental
 # Git References
 
-    $ cat .git/refs/heads/master  
+    $ git rev-parse master
     39e1924cbcf9a59a174d6f13606472a33e4a3f0f
 
     $ git cat-file -p 39e1924cbcf9a59a174d6f13606472a33e4a3f0f
