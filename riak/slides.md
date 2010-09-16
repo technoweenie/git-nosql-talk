@@ -1,53 +1,62 @@
 !SLIDE
 # Git and Riak 
 
-!SLIDE
+!SLIDE bullets
 
+# Core Langauge
 * Riak is written in Erlang
 * Git is written in C
 
-!SLIDE
-# Riak API
-
-* HTTP, web machine
-* Protocol Buffers
-
-!SLIDE
-# Git API
-
-* Extensive set of console commands.
-* libgit2
-
-!SLIDE
+!SLIDE bullets
 # Content Type Agnostic
 
 * Riak values can be anything
 * Git _Blobs_ can be anything
 
+!SLIDE bullets
+# Riak: API
+
+* [HTTP](https://wiki.basho.com/display/RIAK/REST+API)
+* [Protocol Buffers](https://wiki.basho.com/display/RIAK/PBC+API)
+
+!SLIDE bullets
+# Git: API
+
+* Extensive set of console commands.
+* [libgit2](http://github.com/libgit2)
+
+!SLIDE center
+# Riak: Web Scale
+
+[![image of riak cluster ring](riak-ring.png)](https://wiki.basho.com/pages/viewpage.action?pageId=1245320)
+
 !SLIDE
-# Riak
+# Git: OSS Project Scale
 
-[image of riak cluster ring]
+!SLIDE center
+# Riak: Replication
 
-scales to millions of keys, terabytes of data
+![riak data distribution](riak-data-distribution.png)
+
+!SLIDE center
+# Git: Lone Hacker
+
+![image of lone hacker](spider-hacking.jpeg)
 
 !SLIDE
-# Git
+# Git: Making Friends
 
-[image of lone hacker]
-
-Designed for smaller repos with (relatively) little data.
+![image of lone hacker](spider-hacking.jpeg)
+![image of lone hacker](spider-hacking.jpeg)
 
 !SLIDE commandline
-# Riak: Getting a value of a key
+# Riak: Getting a Value
 
-Optimized for retrieving a value of a key.
+    $ curl http://127.0.0.1:8091/riak/my-bucket/my-key
+    ...
 
-$ curl http://riakserver.com/riak/my-bucket/my-key
-...
-
-!SLIDE commandline
-# Git: Getting a value of a key
+!SLIDE commandline incremental
+# Git: Getting a Value
 
     $ git rev-parse master
     3e99e3e55610404b987b0482f8f844eddff98f7b
@@ -64,62 +73,66 @@ $ curl http://riakserver.com/riak/my-bucket/my-key
     040000 tree d69a8aaf94576b718cb5ca8e6fcdf3418e1e12bb	images
     100644 blob 5e40c0877058c504203932e5136051cf3cd3519b	rock-out.md
 
-    $ git cat-file -p d69a8aaf94576b718cb5ca8e6fcdf3418e1e12bb
-    100644 blob 6a003e5ee88ae4a5b03d34529c2ee69b364b12a1	AboutStacks.pdf
-    100644 blob 4fa287fe65d2fbd08ae48391495eead0d5430ff7	Home.md
-    040000 tree d69a8aaf94576b718cb5ca8e6fcdf3418e1e12bb	images
-    100644 blob 5e40c0877058c504203932e5136051cf3cd3519b	rock-out.md
-
     $ git cat-file -p 5e40c0877058c504203932e5136051cf3cd3519b
     boom
 
-!SLIDE
-# Riak
+!SLIDE commandline
+# Riak: Storing a Value
 
-Multiple nodes in a cluster can handle concurrent writes from multiple clients.
+    $ curl http://127.0.0.1:8091/riak/my-bucket/my-key \
+        -H "Content-Type: application/json" -d '{...}'
 
-!SLIDE 
-# Git
+!SLIDE commandline
+# Git: Storing a Value
 
-A repo handles one write at a time, from one user.
+    $ git hash-object -w my-key.json
+    1f7a7a472abf3dd9643fd615f6da379c4acb3e3a
 
-!SLIDE bullets
-# Typical Git Commit
+!SLIDE center
+![](graph-blob.png)
 
-* Write file data => get a Blob SHA
-* Collect Blob SHAs in a directory => get a Tree SHA
-* Combine commit message and root Tree Sha => get a Commit SHA
+!SLIDE commandline incremental
+# Git: Storing a Value
 
-!SLIDE
-# Git conflict resolution
+    $ git update-index --add --cacheinfo 100644 \
+      1f7a7a472abf3dd9643fd615f6da379c4acb3e3a my-key.json
 
-!SLIDE
-# Riak conflict resolution
+    $ git write-tree
+    d8329fc1cc938780ffdd9f94e0d364e0ea74f579
+
+!SLIDE center
+![](graph-tree.png)
+
+!SLIDE commandline incremental
+# Git: Storing a Value
+
+    $ echo 'storing some json' | git commit-tree d8329f
+    fdf4fc3344e67ab068f836878b6c4951e3b15f3d
+
+!SLIDE center
+![](graph-commit.png)
 
 !SLIDE
 # Object Linking
 
 * Git objects naturally link to themselves.
-* Commit => Parent commits, Author, Committer, Tree
-* Tree => Blobs, Trees
+* Commit => Parent Commits, Author, Committer, Tree
+* Tree => Blobs, Sub Trees
 
 !SLIDE
 # Object Linking
 
 * Riak objects can link to any other object
-* Artist => Album => Track
 * Link Walking
 
+!SLIDE commandline
+# Git already has search!
+
+    $ git grep Net::HTTP
+    lib/faraday/adapter/net_http.rb: Net::HTTP::Proxy(proxy[:uri].host, proxy[:uri].port, proxy[:user], proxy[:password])
+    lib/faraday/adapter/net_http.rb: Net::HTTP
+
 !SLIDE
-
-Git already has search!
-
-$ git grep casshern
-Home.md:[[images/casshern.jpg]]
-Home.md:[[casshern | casshern.jpg]]
-
-!SLIDE
-
 # Riak Search looks pretty sweet
 
 !SLIDE
