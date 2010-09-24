@@ -12,15 +12,15 @@
 
 ![gitx](gitx.png)
 
-!SLIDE
-
-[![git is a distributed source control tool](pullrequest.png)](http://github.com/sinatra/sinatra/pull/56)
-
 !SLIDE bullets
 # Git for Collaboration
 
 * Supports parallel branches for development.
 * Distribute changes with other remote repositories.
+
+!SLIDE
+
+[![git is a distributed source control tool](pullrequest.png)](http://github.com/sinatra/sinatra/pull/56)
 
 !SLIDE
 
@@ -33,21 +33,21 @@
 * Value = Commit, Directory Tree, File, etc
 
 !SLIDE commandline incremental
-# Internals
+# Writing Objects
+
+    $ echo '{"data":[1,2,3]}' | git hash-object -w --stdin
+    bb12da17bca409723fd745c9afc209662bcbd4d9
+
+
+!SLIDE commandline incremental
+# Reading Objects
 
     $ ls .git/objects/*
-    .git/objects/03:
-    8aa66f94c2ce5a244d465935e91cb58d723724
+    .git/objects/bb:
+    12da17bca409723fd745c9afc209662bcbd4d9
 
-    .git/objects/0a:
-    25d7fa6d7ef8321e0af1d7baffc9cec8b680ab
-
-    $ git cat-file -p 038aa66f94c2ce5a244d465935e91cb58d723724
-    tree 71391b82d04a137b688ec0b574e05fd8ab843e15
-    author rick <technoweenie@gmail.com> 1283565228 -0700
-    committer rick <technoweenie@gmail.com> 1283565228 -0700
-
-    rdd
+    $ git cat-file -p bb12da17bca409723fd745c9afc209662bcbd4d9
+    {"data":[1,2,3]}
 
 !SLIDE commandline incremental
 # Git References
