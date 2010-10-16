@@ -1,4 +1,4 @@
 !SLIDE center
-# Git vs Riak: Battle Royale
+# Git: The Stupid NOSQL Database
 
 ![Scott Pilgrim ftw](battle-royale.png)
