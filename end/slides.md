@@ -25,6 +25,11 @@
 * [github.com/technoweenie](http://github.com/technoweenie)
 * [techno-weenie.net](http://techno-weenie.net)
 
+!SLIDE bullets
+# Slides
+* http://github.com/technoweenie/git-nosql-talk
+* http://github.com/technoweenie/madrox
+
 !SLIDE center
 
 ![Thanks!](big-thanks.jpg)

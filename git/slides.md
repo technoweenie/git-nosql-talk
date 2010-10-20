@@ -84,7 +84,7 @@
 ![simplified git graph](graph-complete.png)
 
 !SLIDE center
-downloads pic with lightweight tags
+![](lightweight-tag-downloads.png)
 
 !SLIDE commandline
 # Annotated Tags
@@ -94,7 +94,7 @@ downloads pic with lightweight tags
     # Stores Message
 
 !SLIDE center
-downloads pic with annotated tags (release notes)
+![](annotated-tag-downloads.png)
 
 !SLIDE center commandline
 # [Gollum](http://github.com/github/gollum)
@@ -114,6 +114,8 @@ downloads pic with annotated tags (release notes)
     >> Maximum connections set to 1024
     >> Listening on 0.0.0.0:4567, CTRL+C to stop
 
+!SLIDE center
+![](gollum-web.png)
 
 !SLIDE
 # History of Changes
@@ -127,6 +129,9 @@ downloads pic with annotated tags (release notes)
       end
     end
 
+!SLIDE center
+![](gollum-history.png)
+
 !SLIDE
 # Diffs
 
@@ -138,6 +143,9 @@ downloads pic with annotated tags (release notes)
         @wiki.repo.diff(start, finish, @path)
       end
     end
+
+!SLIDE center
+![](gollum-diff.png)
 
 !SLIDE 
 # Search With Grep
@@ -201,11 +209,16 @@ downloads pic with annotated tags (release notes)
     # 100644 blob SHA 60638 images/send-pull-req.png
 
 !SLIDE center
-wikipedia image
+# A "big" Gollum Wiki
+![](big-gollum-wiki.png)
+
+!SLIDE center
+# Gollum Wikis Won't Scale
+![](wikipedia.png)
 
 !SLIDE center
 # Smoke is Grit in the Cloud
-how we made github fast
+![](making-github-fast.png)
 
 !SLIDE bullets
 # Smoke is Grit in the Cloud
@@ -228,7 +241,7 @@ how we made github fast
 
 !SLIDE center
 # Get Git a Wingman!
-![](go_team_venture.png)
+[![](go_team_venture.png)](http://www.adultswim.com/shows/the-venture-bros/index.html)
 
 !SLIDE 
 # Use Simple APIs
@@ -341,7 +354,7 @@ how we made github fast
 !SLIDE center
 
 # BONUS ROUND: Madrox
-![](Madrox-multiple-man.jpeg)
+[![](Madrox-multiple-man.jpeg)](http://en.wikipedia.org/wiki/Jamie_Madrox)
 [http://github.com/technoweenie/madrox](http://github.com/technoweenie/madrox)
 
 !SLIDE commandline

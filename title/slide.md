@@ -1,4 +1,4 @@
 !SLIDE center
 # Git: The Stupid NOSQL Database
 
-![Scott Pilgrim ftw](battle-royale.png)
+[![](brock.jpeg)](http://www.adultswim.com/shows/the-venture-bros/index.html)
