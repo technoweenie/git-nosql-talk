@@ -72,6 +72,9 @@
     $ cat .git/refs/heads/my-new-branch
     74d193238c5141f1bbf28541457137a82bc95edf
 
+!SLIDE center
+![simplified git graph](graph-complete.png)
+
 !SLIDE commandline
 # Tags
 
@@ -79,9 +82,6 @@
 
     $ cat .git/refs/tags/v1.0
     74d193238c5141f1bbf28541457137a82bc95edf
-
-!SLIDE center
-![simplified git graph](graph-complete.png)
 
 !SLIDE center
 ![](lightweight-tag-downloads.png)
@@ -217,6 +217,10 @@
 ![](wikipedia.png)
 
 !SLIDE center
+# Get Git a Wingman!
+[![](go_team_venture.png)](http://www.adultswim.com/shows/the-venture-bros/index.html)
+
+!SLIDE center
 # Smoke is Grit in the Cloud
 ![](making-github-fast.png)
 
@@ -238,10 +242,6 @@
     subtree = tree / 'lib'
     blob    = subtree / 'gollum.rb'
     puts blob.data
-
-!SLIDE center
-# Get Git a Wingman!
-[![](go_team_venture.png)](http://www.adultswim.com/shows/the-venture-bros/index.html)
 
 !SLIDE 
 # Use Simple APIs
