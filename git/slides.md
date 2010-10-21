@@ -5,7 +5,7 @@
 
 # DVCS
 
-### Dynamic Version Control System
+### Distributed Version Control System
 
 !SLIDE 
 
