@@ -13,22 +13,14 @@
 # Projects
 
 * [Gollum](http://github.com/github/gollum)
-* [Showoff](http://github.com/schacon/showoff)
 * [Wheat](http://github.com/creationix/wheat)
 * [Madrox](http://github.com/technoweenie/madrox)
-
-!SLIDE bullets
-
-# Stalk me! #
-
-* [@technoweenie](http://twitter.com/technoweenie)
-* [github.com/technoweenie](http://github.com/technoweenie)
-* [techno-weenie.net](http://techno-weenie.net)
+* [GitModel](https://github.com/pauldowman/gitmodel)
 
 !SLIDE bullets
 # Slides
 * http://github.com/technoweenie/git-nosql-talk
-* http://github.com/technoweenie/madrox
+* http://git-nosql-rubyconf.heroku.com/
 
 !SLIDE center
 

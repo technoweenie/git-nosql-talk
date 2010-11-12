@@ -1,4 +1,4 @@
-{ "name": "Git vs Riak: Battle Royale"
+{ "name": "Git: The Stupid NOSQL Database"
 , "sections": 
   [ { "section": "title" } 
   , { "section": "intro" }

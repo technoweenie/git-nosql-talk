@@ -12,8 +12,10 @@
 ![stupid content tracker](man_git.png)
 
 !SLIDE
-
 # Git is a NOSQL DB?
+
+!SLIDE
+# Git is a <del>NOSQL</del> DB?
 
 !SLIDE
 # Git is a key/value store.
@@ -95,6 +97,127 @@
 
 !SLIDE center
 ![](annotated-tag-downloads.png)
+
+!SLIDE center
+[![](true-grit-poster.jpeg)](http://github.com/mojombo/grit)
+
+!SLIDE
+# [Grit](http://github.com/mojombo/grit)
+
+    @@@ ruby
+    require 'grit'
+    repo = Grit::Repo.new("/Users/tom/dev/grit")
+    repo.commits
+    # => [#<Grit::Commit "e80bbd2ce67651aa18e57fb0b43618ad4baf7750">,
+          #<Grit::Commit "91169e1f5fa4de2eaea3f176461f5dc784796769">,
+          #<Grit::Commit "038af8c329ef7c1bae4568b98bd5c58510465493">,
+          #<Grit::Commit "40d3057d09a7a4d61059bca9dca5ae698de58cbe">,
+          #<Grit::Commit "4ea50f4754937bf19461af58ce3b3d24c77311d9">]
+
+!SLIDE
+# [GitModel](https://github.com/pauldowman/gitmodel)
+
+    @@@ ruby
+    GitModel.db_root = '/tmp/gitmodel-data'
+    GitModel.create_db!
+
+    class Post
+      include GitModel::Persistable
+
+      attribute :title
+      attribute :body
+      attribute :categories, :default => []
+      attribute :allow_comments, :default => true
+
+      blob :image
+    end
+
+!SLIDE
+# GitModel
+
+    @@@ ruby
+    p = Post.new(:id => 'hotdog-eating-contest', :title => 'I won!')
+    p.body = 'This weekend I won a hotdog eating contest!'
+    p.image = some_binary_data
+    p.blobs['hotdogs.jpg'] = some_binary_data
+    p.blobs['the-aftermath.jpg'] = some_binary_data
+    p.save!
+
+!SLIDE center
+# Ribbit
+
+[![](hypnotoad.gif)](http://github.com/libgit2/ribbit)
+
+[libgit2](http://github.com/libgit2/libgit2) /
+[ribbit](http://github.com/libgit2/ribbit)
+
+!SLIDE
+# ALL HAIL RIBBIT
+
+    @@@ ruby
+    repo   = Ribbit::Repository.new("/Users/tom/dev/grit")
+    walker = Ribbit::Walker.new(repo)
+    walker.push("e80bbd2ce67651aa18e57fb0b43618ad4baf7750")
+    walker.hide("4ea50f4754937bf19461af58ce3b3d24c77311d9")
+    while commit = walker.next
+      puts commit.sha
+    end
+
+!SLIDE center 
+# Wheat
+![](wheat.png)
+
+!SLIDE commandline incremental
+# Tracked Revisions
+
+    $ git log -- articles/object-graphs-3.markdown
+    commit dbef73b7a16df4ad5f9473e3eaf66e52d4c35f71
+    Author: Tim Caswell <tim@creationix.com>
+    Date:   Tue Nov 9 10:01:19 2010 -0800
+
+        Update the headers.
+
+    commit 9bf2f0e1c16ce0c32f79f2fde7e683dee41dec24
+    Author: Tim Caswell <tim@creationix.com>
+    Date:   Tue Nov 9 09:59:03 2010 -0800
+
+        Add part three of the object series article.
+
+
+!SLIDE commandline incremental
+# Attached Code Samples
+
+    $ git ls-tree master articles/object-graphs-3/
+    100644 blob 1972c9b articles/object-graphs-3/Class.js
+    100644 blob ab10772 articles/object-graphs-3/Enumerable.js
+    100644 blob 8907d13 articles/object-graphs-3/animal.js
+    100644 blob 09b09bb articles/object-graphs-3/animal.js.dot
+    100644 blob 7cfac5c articles/object-graphs-3/animal.js.simple.dot
+    100644 blob 83647ea articles/object-graphs-3/animal.rb
+    100644 blob f5cb2e3 articles/object-graphs-3/animal.rb.dot
+    100644 blob f840ffe articles/object-graphs-3/animal.rb.simple.dot
+    100644 blob e69de29 articles/object-graphs-3/class.rb
+    100644 blob 7d6734d articles/object-graphs-3/dave.js
+    100644 blob b0e032d articles/object-graphs-3/dave.js.dot
+    100644 blob 9c4d8dd articles/object-graphs-3/dave.rb
+    100644 blob bae6591 articles/object-graphs-3/dave.rb.dot
+    100644 blob 4d9d439 articles/object-graphs-3/dave2.js
+    100644 blob 4ee986c articles/object-graphs-3/dave2.js.dot
+    100644 blob 942f2a2 articles/object-graphs-3/dave2.rb
+    100644 blob d36b002 articles/object-graphs-3/dave2.rb.dot
+    100644 blob a3b64fc articles/object-graphs-3/singleton.js
+    100644 blob 7d23adc articles/object-graphs-3/singleton.js.dot
+    100644 blob 173ffc7 articles/object-graphs-3/singleton.rb
+    100644 blob ea556f8 articles/object-graphs-3/singleton.rb.dot
+    100644 blob 336910b articles/object-graphs-3/test.js
+
+!SLIDE center
+![](wheat-sidebar.png)
+
+!SLIDE
+# Social Git Use
+
+## "The content for this site is stored in a **git** repository that anyone can fork, write an article, and **send a pull request**. If your article passes the quality standards it will be published and help support the greater node community."
 
 !SLIDE center commandline
 # [Gollum](http://github.com/github/gollum)
@@ -188,20 +311,11 @@
 # GitRuby vs Native Git
 
     @@@ ruby
-    # git ls-tree master
-    puts grit.ls_tree({}, 'master')
-    # 100644 blob SHA  home.md
-    # 040000 tree SHA  images
+    puts grit.ls_tree(
+      {:l => true, :r => true}, 'master')
+    # 100644 blob SHA home.md
+    # 100644 blob SHA images/send-pull-req.png
 
-    # git ls-tree master -r
-    puts grit.ls_tree({:r => true}, 'master')
-    # 100644 blob SHA  home.md
-    # 100644 blob SHA  images/send-pull-req.png
-
-!SLIDE
-# GitRuby vs Native Git
-
-    @@@ ruby
     # git ls-tree master -r -l
     puts grit.native(:ls_tree, 
       {:l => true, :r => true}, 'master')
@@ -215,6 +329,36 @@
 !SLIDE center
 # Gollum Wikis Won't Scale
 ![](wikipedia.png)
+
+!SLIDE
+# Concurrent Git Commits
+
+## fatal: Unable to create '.git/index.lock': File exists.
+
+## If no other git process is currently running, this probably means a git process crashed in this repository earlier. Make sure no other git process is running and remove the file manually to continue.
+
+!SLIDE
+# Concurrent Git Commits
+
+    @@@ ruby
+    # possible race condition!
+    grit.index.commit(message, 
+      :parents => [SHA1], :head => "master")
+
+!SLIDE center
+# Commit SHAs =~ Vector Clocks
+
+[![](a-vectors.png)](http://blog.basho.com/2010/04/05/why-vector-clocks-are-hard/)
+
+!SLIDE center
+# Git only _detects_ conflicts
+
+![](spider-hacking.jpeg)
+
+!SLIDE center
+# Git requires manual merges
+
+![](hacking-spiders.gif)
 
 !SLIDE center
 # Get Git a Wingman!
@@ -273,40 +417,6 @@
         def tree!(sha)
           @repo.tree(sha)
         end
-
-!SLIDE
-# Use Simple APIs
-    @@@ ruby
-    # Basic Implementation, no caching
-    def get_cache(name, key)
-      yield
-    end
-
-    def get_cache(name, key)
-      cache_key = build_key(name, key)
-      value     = @cache.get(cache_key)
-      if value.nil? && block_given?
-        set_cache(name, key, value = yield)
-      end
-      value
-    end
-
-!SLIDE
-# Use Simple APIs
-    @@@ ruby
-    
-    def get_cache(name, key)
-      yield
-    end
-    # Simple Memcache version
-    def get_cache(name, key)
-      cache_key = build_key(name, key)
-      value     = @cache.get(cache_key)
-      if value.nil? && block_given?
-        set_cache(name, key, value = yield)
-      end
-      value
-    end
 
 !SLIDE
 # Memcache/Redis for caching
@@ -375,40 +485,48 @@
      0 files changed, 0 insertions(+), 0 deletions(-)
      create mode 100644 README
 
-!SLIDE commandline
+!SLIDE
 # First Tweet
 
-    $ ../madrox/bin/madrox technoweenie \
-      --email=rick@github.com --msg="Hi"
-    @technoweenie: Hi
-    52c3d2dfd81e918d491d5c9895fca33a91427387
-    [Wed Oct 20 08:47:34 +0200 2010] @technoweenie: Hi
+    @@@ ruby 
+    repo = Madrox::Repo.new "/path/to/repo"
+    timeline = repo.timeline('technoweenie', 'rick@email.com')
+    tineline.post("Hi")
 
-!SLIDE commandline
-# First @mention
+!SLIDE
+# Retweeting
 
-    $ ../madrox/bin/madrox atmos --email=corey@github.com \
-      --msg="@technoweenie: sup?"
-    @atmos: @technoweenie: sup?
-    139ca4082351caa5565886cf35b9394440152a5f
-    [Wed Oct 20 08:49:13 +0200 2010] @atmos: @technoweenie: sup?
+    @@@ ruby
+    repo = Madrox::Repo.new "/path/to/repo"
+    friend   = repo.timeline("schacon")
+    timeline = repo.timeline('technoweenie', 'rick@email.com')
+    tweet    = friend.messages.first
+    # timeline.post(tweet.message, 
+    #   :author => tweet.author)
+    timeline.retweet(tweet)
 
-!SLIDE commandline
-# First @reply
+!SLIDE
+# Favorites
 
-    $ ../madrox/bin/madrox technoweenie \
-      --email=rick@github.com --msg="@atmos: nada"
-    @technoweenie: @atmos: nada
-    e5a5950c7ff743a636015f1419260f4e9490aef2
-    [Wed Oct 20 08:50:05 +0200 2010] @technoweenie: @atmos: nada
-    [Wed Oct 20 08:47:34 +0200 2010] @technoweenie: Hi
+    @@@ ruby
+    repo = Madrox::Repo.new "/path/to/repo"
+    friend   = repo.timeline("schacon")
+    timeline = repo.timeline('technoweenie', 'rick@email.com')
+    tweet    = friend.messages.first
+    # timeline.post(tweet.message, 
+    #   :head   => "technoweenie-favorites",
+    #   :author => tweet.author)
+    timeline.fave(tweet)
 
-!SLIDE commandline
+!SLIDE
 # Showing Messages: Madrox
 
-    $ ../madrox/bin/madrox technoweenie
-    [Wed Oct 20 08:50:05 +0200 2010] @technoweenie: @atmos: nada
-    [Wed Oct 20 08:47:34 +0200 2010] @technoweenie: Hi
+    @@@ ruby
+    repo = Madrox::Repo.new "/path/to/repo"
+    timeline = repo.timeline('technoweenie', 'rick@email.com')
+    timeline.messages.each do |commit|
+      puts commit.message
+    end
 
 !SLIDE commandline
 # Showing Messages: Git
